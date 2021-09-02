@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{https://kit.fontawesome.com/d1dbd1f9d9.js}" crossorigin="anonymous"></script>
+    <title>인증코드 • Eatstagram</title>
+</head>
+<body>
+
+    <container>
+        <div id="form">
+            <div class="form-logo__find">
+                <h3>Eatstagram</h3>
+                <h1><i class="fas fa-envelope"></i></h1>
+                <h2>인증코드 입력</h2>
+                <h4>이메일 주소로 전송된 코드를 입력하세요.</h4>
+            </div>
+
+            <form th:action="@{/join/mail}" th:method="POST" id="mail-form">
+                <div id="re-mail">
+                    <input type="button" value="코드 재전송" />
+                </div>
+                <input name="mailcode" type="text" placeholder="인증코드" />
+                <input type="hidden" name="certificationNumber" th:value="${certificationNumber}">
+                <input type="hidden" name="emailAuthId" th:value="${emailAuthId}">
+                <input type="submit" value="다음" />
+                <a th:href="@{/}">
+                    <h4>돌아가기</h4>
+                </a>
+            </form>
+        </div>
+
+        <div class="form-bottom__btn">
+            <h2>계정이 있으신가요?</h2>
+            <a th:href="@{/}">
+                <h2 class="form-bottom__link">로그인</h2>
+            </a>
+        </div>
+    </container>
+
+    <container id="footer">
+        <div>
+            <ul class="footer-top">
+                <li>소개</li>
+                <li>블로그</li>
+                <li>채용 정보</li>
+                <li>도움말</li>
+                <li>API</li>
+                <li>개인정보처리방침</li>
+                <li>약관</li>
+                <li>인기 계정</li>
+                <li>해시태그</li>
+                <li>위치</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021 Eatstagram from JinYedo ParkSangJun BaeGyuri</p>
+        </div>
+    </container>
+
+    <script th:inline="javascript">
+        const msg = [[${msg}]];
+        if (msg !== null && msg !== "") {
+            alert(msg);
+        }
+    </script>
+</body>
+</html>

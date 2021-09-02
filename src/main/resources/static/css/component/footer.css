@@ -1,0 +1,37 @@
+/* #footer {
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    color: #909090;
+} */
+
+#footer {
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    color: #909090;
+}
+
+.footer-top {
+    display: flex;
+    list-style:none;
+    justify-content: center;
+}
+
+.footer-top li {
+    margin: 0px 5px;
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    font-size: 10px;
+    margin-bottom: 4%;
+}

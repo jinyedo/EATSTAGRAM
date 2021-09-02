@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <script th:src="@{https://kit.fontawesome.com/d1dbd1f9d9.js}" crossorigin="anonymous"></script>
+    <title>회원가입 • Eatstagram</title>
+</head>
+<body>
+    <container>
+        <div id="form">
+            <div class="form-logo">
+                <h1>Eatstagram</h1>
+                <h4>나만의 맛집을 친구들과 공유하고 싶다면 가입하세요.</h4>
+            </div>
+
+            <form th:action="@{/join}" method="POST" id="join-form">
+                <!--구글 소셜 로그인-->
+                <div class="googlebtn">
+                    <a class="oauth-container btn darken-4 white black-text" th:href="@{/oauth2/authorization/google}">
+                        <div class="inside__google">
+                            <img alt="Google sign-in"
+                                th:src="@{/images/Google_Logo.svg.png}" />
+                            <span>Start with Google</span>
+                        </div>
+                    </a>
+                </div>
+                <!--카카오 소셜 로그인-->
+                <div class="kakaobtn">
+                    <a class="oauth-container btn darken-4 white black-text" th:href="@{/oauth2/authorization/kakao}">
+                        <div class="inside__kakao">
+                            <img alt="Kakao sign-in"
+                                th:src="@{/images/kakao__Logo.svg.png}" />
+                            <span>Start with Kakao</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="line"><span>또는</span></div>
+                <input name="email" type="text" placeholder="이메일 주소" />
+                <input name="username" type="text" placeholder="아이디" />
+                <input name="nickname" type="text" placeholder="닉네임" />
+                <input name="name" type="text" placeholder="이름" />
+                <input name="password" type="password" placeholder="비밀번호" />
+                <input name="confirmPassword" type="password" placeholder="비밀번호 확인" />
+                <input type="submit" value="가입" />
+            </form>
+        </div>
+
+        <div class="form-bottom__btn">
+            <h2>계정이 있으신가요?</h2>
+            <a th:href="@{/login.html}">
+                <h2 class="form-bottom__link">로그인</h2>
+            </a>
+        </div>
+    </container>
+
+    <container id="footer">
+        <div>
+            <ul class="footer-top">
+                <li>소개</li>
+                <li>블로그</li>
+                <li>채용 정보</li>
+                <li>도움말</li>
+                <li>API</li>
+                <li>개인정보처리방침</li>
+                <li>약관</li>
+                <li>인기 계정</li>
+                <li>해시태그</li>
+                <li>위치</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021 Eatstagram from JinYedo ParkSangJun BaeGyuri</p>
+        </div>
+    </container>
+</body>
+
+</html>

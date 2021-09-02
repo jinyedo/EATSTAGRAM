@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{https://kit.fontawesome.com/d1dbd1f9d9.js}" crossorigin="anonymous"></script>
+    <title>로그인 • Eatstagram</title>
+</head>
+<body>
+    <container>
+        <div id="form">
+            <div class="form-logo">
+                <h1>Eatstagram</h1>
+            </div>
+
+            <form th:action="@{/}" th:method="POST" id="login-form" name="login_form">
+                <input name="username" type="text" placeholder="아이디" />
+                <input name="password" type="password" placeholder="비밀번호" />
+                <input type="button" value="로그인" onclick="login()"/>
+                <div class="line"><span>또는</span></div>
+                <!--구글 소셜 로그인-->
+                <div class="googlebtn">
+                    <a class="oauth-container btn darken-4 white black-text" th:href="@{/oauth2/authorization/google}">
+                        <div class="inside__google">
+                            <img alt="Google sign-in"
+                                th:src="@{/images/Google_Logo.svg.png}" />
+                            <span>Login with Google</span>
+                        </div>
+                    </a>
+                </div>
+                <!--카카오 소셜 로그인-->
+                <div class="kakaobtn">
+                    <a class="oauth-container btn darken-4 white black-text" th:href="@{/oauth2/authorization/kakao}">
+                        <div class="inside__kakao">
+                            <img alt="Kakao sign-in"
+                                th:src="@{/images/kakao__Logo.svg.png}" />
+                            <span>Login with Kakao</span>
+                        </div>
+                    </a>
+                </div>
+                <a th:href="@{/find/password}">
+                    <h4>비밀번호를 잊으셨나요?</h4>
+                </a>
+            </form>
+        </div>
+
+        <div class="form-bottom__btn">
+            <h2>계정이 없으신가요?</h2>
+            <a th:href="@{/join}">
+                <h2 class="form-bottom__link">가입하기</h2>
+            </a>
+        </div>
+
+    </container>
+
+    <container id="footer">
+        <div>
+            <ul class="footer-top">
+                <li>소개</li>
+                <li>블로그</li>
+                <li>채용 정보</li>
+                <li>도움말</li>
+                <li>API</li>
+                <li>개인정보처리방침</li>
+                <li>약관</li>
+                <li>인기 계정</li>
+                <li>해시태그</li>
+                <li>위치</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021 Eatstagram from JinYedo ParkSangJun BaeGyuri</p>
+        </div>
+    </container>
+    <script th:src="@{/jquery/jquery.min.js}"></script>
+    <script th:inline="javascript">
+        const msg = [[${msg}]];
+        if (msg !== null && msg !== "") {
+            alert(msg);
+        }
+
+        // 스페이스 입력 제한
+        function checkSpace() {
+            const kcode = event.keyCode;
+            if (kcode === 32) event.returnValue = false;
+        }
+
+        const login_form = document.login_form;
+        const username = login_form.username
+        const password = login_form.password
+
+        function login() {
+            if (username.value.length === 0 || username.value === "") {
+                username.focus();
+                alert("아이디를 입력해주세요");
+            } else if (password.value.length === 0 || password.value === "") {
+                password.focus();
+                alert("비밀번호를 입력해주세요");
+            } else if (username.value.length !== 0 && username.value !== "" && password.value.length !== 0 && password.value !== "") {
+                login_form.submit();
+            }
+        }
+
+        username.addEventListener("keypress", function (event) {
+            if (event.keyCode === 13) {
+                login();
+            }
+        })
+
+        password.addEventListener("keypress", function (event) {
+            if (event.keyCode === 13) {
+                login();
+            }
+        })
+
+    </script>
+</body>
+</html>

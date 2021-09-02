@@ -1,0 +1,89 @@
+//querydsl 추가
+buildscript {
+    dependencies {
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // querydsl plugin 추가
+    id 'java'
+}
+
+group = 'daelim.project'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+//apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+//querydsl 추가
+project.afterEvaluate {
+    project.tasks.compileQuerydsl.options.compilerArgs = [
+            "-proc:only",
+            "-processor", project.querydsl.processors() +
+                    ',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+    ]
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+    // 소셜로그인 및 회원가입 유효성 검사 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.5.4'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
+    // 웹소켓 관련 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-websocket:2.5.4'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    // QueryDsl 라이브러리
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
+    // Base 관련 라이브러리
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools:2.5.4'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+    testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+// querydsl 추가 끝

@@ -1,0 +1,21 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Chewy&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap);
+@import "reset.css";
+
+/***screen***/
+@import "start-form.css";
+
+/***component***/
+@import "./component/footer.css";
+
+
+/*********/
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    -ms-overflow-style: none; 
+    margin: 0 auto;
+    max-width: 720px;
+    background-color: #dbdbdb28;
+}
